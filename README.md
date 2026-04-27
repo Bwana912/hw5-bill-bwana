@@ -112,11 +112,11 @@ hw5-bill-bwana/
 2. **Detects** action item lines by matching trigger patterns (`Action:`, `TODO:`, `[ ]`, etc.) at the start of a line. Multi-line continuation (indented lines) is accumulated into a single item.
 3. **Extracts the assignee** using `@mention` syntax or labeled patterns like `Owner: Name` or `Assigned to: Name`, stopping before due-date keywords to avoid over-capture.
 4. **Extracts the raw due date** by matching `Due:`, `By:`, or `Deadline:` prefixes, then falling back to any bare date-shaped token on the line.
-5. **Parses the date** by trying a prioritized list of regex patterns and `strptime` format strings. Three-letter month abbreviations (e.g., "Apr") are expanded before matching.
+5. **Parses the date** in two stages: first checks for relative expressions (`next Monday`, `next Friday`, `tomorrow`, `next week`, `end of week`, `end of month`) and resolves them against today's date using `timedelta` math; then tries a prioritized list of absolute format patterns (`YYYY-MM-DD`, `MM/DD/YYYY`, etc.) via `strptime`. No external libraries.
 6. **Validates the date** against three rules: not in the past, not on a Saturday or Sunday, and not more than 180 days ahead.
-7. **Outputs a Markdown table** to stdout and, if `--output` is passed, writes a structured JSON file.
+7. **Outputs** a Markdown table (default) or CSV (`--format csv`) to stdout and, if `--output` is passed, writes a structured JSON file.
 
-The script uses only Python's standard library (`argparse`, `json`, `re`, `sys`, `datetime`).
+The script uses only Python's standard library (`argparse`, `csv`, `json`, `re`, `sys`, `datetime`).
 
 ---
 

@@ -134,7 +134,7 @@ Do not add assignees, invent due dates, or rewrite task descriptions. If a field
 
 ## Limitations and checks
 
-- **Date parsing is format-sensitive.** Natural-language relative dates like "next Friday" or "end of quarter" are not supported. Only explicit calendar dates in the listed formats are parsed.
+- **Relative expressions are supported for common cases.** `next Monday`, `next Friday`, `tomorrow`, `next week`, `end of week`, and `end of month` are resolved deterministically. Vague expressions like "end of quarter," "soon," or "ASAP" cannot be parsed and will be flagged.
 - **Assignee detection is pattern-based.** If assignees are written in an unusual format (e.g., "Responsibility: Full Name"), they will be reported as "Unassigned." Prompt the user to clarify.
 - **Multi-line continuation is limited.** Continuation lines must be indented with at least four spaces or a tab directly after the trigger line.
 - **English only.** Month names in languages other than English will not parse correctly.

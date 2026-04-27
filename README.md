@@ -1,5 +1,9 @@
 # Homework 5 — meeting-notes-to-actions
 
+[![CI](https://github.com/Bwana912/hw5-bill-bwana/actions/workflows/ci.yml/badge.svg)](https://github.com/Bwana912/hw5-bill-bwana/actions/workflows/ci.yml)
+![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
 **Course:** BU 330.760 — AI for Business  
 **Submission:** hw5-bwana  
 **Video:** [Insert video link here]
@@ -30,8 +34,11 @@ This meant the Python script would be genuinely load-bearing rather than decorat
 ### Run the script directly
 
 ```bash
-# Normal usage
-python .agents/skills/meeting-notes-to-actions/scripts/parse_actions.py <notes_file.txt>
+# Normal usage (Markdown table)
+python .agents/skills/meeting-notes-to-actions/scripts/parse_actions.py notes.txt
+
+# CSV output — import directly into Excel or Google Sheets
+python .agents/skills/meeting-notes-to-actions/scripts/parse_actions.py notes.txt --format csv
 
 # With JSON output
 python .agents/skills/meeting-notes-to-actions/scripts/parse_actions.py notes.txt --output actions.json
@@ -41,6 +48,9 @@ python .agents/skills/meeting-notes-to-actions/scripts/parse_actions.py notes.tx
 
 # Strict mode: exit code 1 if any warnings present (useful in CI)
 python .agents/skills/meeting-notes-to-actions/scripts/parse_actions.py notes.txt --strict
+
+# Run the automated test suite
+python run_tests.py
 ```
 
 ### Invoke via agent
@@ -62,17 +72,33 @@ Preceded by `Due:`, `Due date:`, `By:`, or `Deadline:`, or as a bare date on the
 ## Folder structure
 
 ```
-hw5-bwana/
+hw5-bill-bwana/
+├─ .github/
+│  └─ workflows/
+│     └─ ci.yml                        # GitHub Actions CI (Python 3.10, 3.11, 3.12)
 ├─ .agents/
 │  └─ skills/
 │     └─ meeting-notes-to-actions/
 │        ├─ SKILL.md                   # Agent-facing skill definition and instructions
-│        └─ scripts/
-│           └─ parse_actions.py        # Load-bearing deterministic Python script
+│        ├─ scripts/
+│        │  └─ parse_actions.py        # Load-bearing deterministic Python script
+│        └─ references/
+│           └─ REFERENCES.md           # Design rationale and library pointers
+├─ docs/
+│  ├─ agent-transcript.md              # Full Claude Code session transcript (3 scenarios)
+│  └─ design.md                        # Architecture and model-vs-code design decisions
 ├─ sample_inputs/
 │  ├─ sample_normal.txt                # Normal test case
 │  ├─ sample_edge.txt                  # Edge case: past dates, weekends, bad formats
 │  └─ sample_cautious.txt             # Cautious case: no action items present
+├─ sample-outputs/
+│  ├─ normal-case-output.md            # Actual terminal output — normal case
+│  ├─ edge-case-output.md             # Actual terminal output — edge case
+│  └─ cautious-case-output.md         # Actual terminal output — cautious case
+├─ run_tests.py                        # Deterministic PASS/FAIL test runner (5 cases)
+├─ CHANGELOG.md                        # Version history
+├─ CONTRIBUTING.md                     # How to extend the skill
+├─ LICENSE                             # MIT
 └─ README.md
 ```
 
@@ -131,7 +157,7 @@ The script uses only Python's standard library (`argparse`, `json`, `re`, `sys`,
 
 ## Limitations that remain
 
-- **Natural-language relative dates are not supported.** Inputs like "next Friday," "end of quarter," or "ASAP" are flagged as unparseable and reported as warnings. Supporting these would require a library like `dateparser` or a dedicated model call.
+- **Relative date expressions are supported without any library.** `next Monday`, `next Friday`, `tomorrow`, `next week`, `end of week`, and `end of month` are resolved deterministically against today's date using only `datetime` math. Inputs like "end of quarter" or "ASAP" are still flagged as unparseable.
 - **English-only month names.** The month expansion step handles English only. Notes written with French, Spanish, or other month names will fail to parse dates.
 - **No inference on missing fields.** If an assignee or due date is absent, the script reports it and stops. It does not attempt to infer ownership from conversational context in the notes.
 - **No task-tracker integration.** The skill outputs a Markdown table and optional JSON. Pushing items to Asana, Jira, or Linear is out of scope and would require a separate integration layer.

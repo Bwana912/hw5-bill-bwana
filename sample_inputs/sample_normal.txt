@@ -1,0 +1,14 @@
+Q2 Planning Kickoff — April 26, 2026
+Attendees: Maya, Jordan, Priya, Marcus
+
+We aligned on the Q2 roadmap priorities and confirmed the project leads for each workstream.
+The team will aim to have the onboarding module complete before the May sprint review.
+
+Action: Draft updated onboarding documentation @maya Due: 2026-05-02
+Action item: Review and approve Q2 budget proposal @jordan Due date: May 9, 2026
+Action: Schedule stakeholder briefing for program leads @priya By: 05/07/2026
+TODO: Send meeting invites for May sync series @marcus Due: 2026-05-04
+[ ] Confirm vendor contract renewal — assigned to: Maya Due: May 12, 2026
+Action: Prepare slide deck for board update @jordan Due: 2026-05-15
+
+Next meeting: May 3, 2026 at 10am EST.

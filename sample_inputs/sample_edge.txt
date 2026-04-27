@@ -1,0 +1,11 @@
+Emergency Response Retrospective — April 26, 2026
+Attendees: Sam, Dana, Kenji
+
+Retrospective on the outage from last week. Several follow-up items remain open.
+
+Action: Write post-mortem report @sam Due: 2026-04-20
+Action: Update runbook documentation Due: 04/26/2026
+TODO: Notify affected clients by Saturday @dana Due: 2026-04-25
+Action item: Archive incident logs @kenji Due: next quarter
+[ ] Reassign on-call rotation — no assignee Due: 2026-05-03
+Action: Present findings to leadership @sam Due: 2026-12-31

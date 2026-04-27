@@ -215,8 +215,9 @@ def parse_action_line(line: str) -> dict:
     assignee, body = extract_assignee(body)
     raw_due, body = extract_due_date_raw(body)
 
-    # Whatever remains is the description; clean stray punctuation
-    description = body.strip().strip("|,;").strip()
+    # Whatever remains is the description; strip trailing separator chars
+    # (em dashes and pipes often appear when assignee/date tokens are removed)
+    description = re.sub(r'[\s|,;—–\-]+$', '', body.strip()).strip()
     if not description:
         description = line.strip()  # fall back to the full line if parsing consumed everything
 

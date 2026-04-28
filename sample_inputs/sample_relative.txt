@@ -1,0 +1,7 @@
+Sprint Planning — April 27, 2026
+Team: Alice, Bob, Carol
+
+Action: Finalize API design doc @alice Due: next Friday
+Action: Set up staging environment @bob Due: next Monday
+TODO: Send client update email @carol Due: tomorrow
+Action: Review pull requests @alice Due: end of week

@@ -28,3 +28,6 @@ Thumbs.db
 
 # Claude Code internal state
 .claude/
+
+# Personal working files (not part of submission)
+video_script.md

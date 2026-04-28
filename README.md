@@ -6,7 +6,7 @@
 
 **Course:** BU 330.760 — AI for Business  
 **Submission:** hw5-bwana  
-**Video:** [Insert video link here]
+**Video:** [Watch the walkthrough](https://youtu.be/2Q9Nmz1nkKQ)
 
 ---
 
